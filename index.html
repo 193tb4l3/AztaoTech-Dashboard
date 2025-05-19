@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NeonLock - Smart Lock Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script>
+    if (localStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <div class="dashboard-container">
+    <!-- Floating Sidebar -->
+    <div class="sidebar">
+      <div class="brand">
+        <div class="logo">
+          <i class="fas fa-fingerprint"></i>
+        </div>
+        <h1>Neon<span>Lock</span></h1>
+      </div>
+      
+      <div class="user-profile">
+        <div class="avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="user-info">
+          <span class="username">Admin</span>
+          <span class="role">Owner</span>
+        </div>
+      </div>
+      
+      <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-power-off"></i>
+        <span>Logout</span>
+      </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="status-header">
+        <h2><i class="fas fa-bolt"></i> REAL-TIME LOCK STATUS</h2>
+        <div class="connection-badge" id="firebaseStatus">
+          <span class="status-dot"></span>
+          <span>Connecting...</span>
+        </div>
+      </div>
+
+      <!-- Lock Status Card -->
+      <div class="lock-visualization" id="statusBox">
+        <div class="lock-circle" id="lockCircle">
+          <div class="lock-core">
+            <i class="fas fa-lock" id="lockIcon"></i>
+          </div>
+          <div class="ring"></div>
+          <div class="particles"></div>
+        </div>
+        <div class="lock-info">
+          <h3 id="lockStatusText">SYSTEM INITIALIZING</h3>
+          <div class="status-details">
+            <div class="detail-item">
+              <i class="fas fa-clock"></i>
+              <span id="lockStatusTime">--:--:--</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Front Door</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Control Panel -->
+      <div class="control-panel">
+        <h3><i class="fas fa-gamepad"></i> CONTROL PANEL</h3>
+        <div class="control-buttons">
+          <button id="unlockBtn" class="control-btn unlock">
+            <i class="fas fa-unlock-alt"></i>
+            <span>UNLOCK</span>
+            <div class="btn-hover-effect"></div>
+          </button>
+          <button id="lockBtn" class="control-btn lock">
+            <i class="fas fa-lock"></i>
+            <span>LOCK</span>
+            <div class="btn-hover-effect"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Activity Feed -->
+      <div class="activity-feed">
+        <div class="feed-header">
+          <h3><i class="fas fa-list-alt"></i> ACTIVITY LOG</h3>
+          <div class="feed-controls">
+            <button class="refresh-btn">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+          </div>
+        </div>
+        <div class="feed-content">
+          <div class="log-entry">
+            <div class="entry-icon">
+              <i class="fas fa-info-circle"></i>
+            </div>
+            <div class="entry-content">
+              <p id="lastAction">System initialized at <span id="currentTime">--:--:--</span></p>
+              <span class="entry-time">Just now</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
